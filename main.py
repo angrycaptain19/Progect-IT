@@ -17,61 +17,60 @@ class Interface:
         master.configure(bg='blue')
         master.resizable(False, False)
 
-        self.url = "https://www.eduspb.com/node/1669"
+        self.url = "https://www.webmath.ru/poleznoe/fizika/fizika_103_dvizhenie_tela_broshennogo_gorizontalno.php"
         self.zag = Label(self.master, text='Моделирование\n траектории движения брошенного тела', \
                          font='Verdana, 30', bg='blue', fg='yellow')
         self.zag.place(x=500, y=70, anchor='center')
 
-        self.mb = Menubutton(self.master, text="Выберите тип броска", bg='green', bd='10', font='12')
+        self.mb = Menubutton(self.master, text="Выберите тип броска", bg='green', bd='10', font='12') # создание кнопки МЕНЮ для выбора типа броска
         self.mb.menu = Menu(self.mb, tearoff=0)
         self.mb["menu"] = self.mb.menu
         self.mb.place(x=20, y=150, anchor='nw', height=50, width=230, bordermode=INSIDE)
-        self.mb.menu.add_command(label="Под углом к горизонту", command=self.press)
+        self.mb.menu.add_command(label="Под углом к горизонту", command=self.press) # создание подпунктов МЕНЮ для выбора типа броска
+        self.mb.menu.add_separator()
         self.mb.menu.add_command(label="Горизонтально", command=self.press_1)
+        self.mb.menu.add_separator()
         self.mb.menu.add_command(label="Вертикально вверх", command=self.press_2)
         self.mb.menu.add_separator()
-        self.mb.menu.add_command(label="Выход")
 
-        self.mb_vale = Menubutton(self.master, text="Введите данные", bg='green', bd='10', font='12', )
+        self.mb_vale = Menubutton(self.master, text="Введите данные", bg='green', bd='10', font='12', ) # создание кнопки МЕНЮ для ввода данных
         self.mb_vale.menu = Menu(self.mb_vale, tearoff=0)
         self.mb_vale["menu"] = self.mb_vale.menu
         self.mb_vale.place(x=20, y=240, anchor='nw', height=50, width=230, bordermode=INSIDE)
-        self.mb_vale.menu.add_command(label="Ввести с клавиатуры", command=self.press_input)
-        self.mb_vale.menu.add_command(label="Считать из файла", command= self.read_text)
+        self.mb_vale.menu.add_command(label="Ввести с клавиатуры", command=self.press_input) # создание подпунктов МЕНЮ для выбора способа ввода данных
         self.mb_vale.menu.add_separator()
-        self.mb_vale.menu.add_command(label="Выход")
+        self.mb_vale.menu.add_command(label="Считать из файла", command=self.read_text)
+        self.mb_vale.menu.add_separator()
 
         self.visualization = Button(self.master, text="Визуализация данных", bg='green', font='12',
-                                    command=self.openGraphica)
+                                    command=self.openGraphica)  # создание кнопки для вызова графического окна с визуализацией данных
         self.visualization.place(x=20, y=330, anchor='nw', height=50, width=230, bordermode=INSIDE)
 
-        self.mb_info = Menubutton(self.master, text="Теория по теме", bg='green', bd='10', font='12', )
+        self.mb_info = Menubutton(self.master, text="Теория по теме", bg='green', bd='10', font='12', ) # создание кнопки МЕНЮ для выбора способа отображения теории по теме
         self.mb_info.menu = Menu(self.mb_info, tearoff=0)
         self.mb_info["menu"] = self.mb_info.menu
         self.mb_info.place(x=20, y=420, anchor='nw', height=50, width=230, bordermode=INSIDE)
         self.mb_info.menu.add_command(label="Информационный ресурс в браузере",
-                                      command=lambda aurl=self.url: self.url_open(aurl))
+                                      command=lambda aurl=self.url: self.url_open(aurl))  # создание подпунктов МЕНЮ для выбора способа отображения теории по теме
         self.mb_info.menu.add_command(label="Ознакомиться в приложении", command=self.openDialog)
         self.mb_info.menu.add_separator()
-        self.mb_info.menu.add_command(label="Выход")
 
-        self.mb_save = Menubutton(self.master, text="Сохранить результат", bg='green', bd='10', font='12', )
+        self.mb_save = Menubutton(self.master, text="Сохранить результат", bg='green', bd='10', font='12', ) # создание кнопки МЕНЮ для выбора способа сохранения результатов
         self.mb_save.menu = Menu(self.mb_save, tearoff=0)
         self.mb_save["menu"] = self.mb_save.menu
         self.mb_save.place(x=20, y=510, anchor='nw', height=50, width=230, bordermode=INSIDE)
-        self.mb_save.menu.add_command(label="Сохранить в файл", command=self.file_save)
-        self.mb_save.menu.add_command(label="Выслать на электронную почту")
+        self.mb_save.menu.add_command(label="Сохранить в файл", command=self.file_save)  # создание подпунктов МЕНЮ для выбора способа сохранения результатов
+        self.mb_save.menu.add_command(label="Выслать на электронную почту") # отсылка на электронную почту не реализована
         self.mb_save.menu.add_separator()
-        self.mb_save.menu.add_command(label="Выход")
 
-        self.subtitle = Label(self.master, text="Тип броска", font='Arial, 26', bg='blue', fg='chartreuse')
+        self.subtitle = Label(self.master, text="Тип броска", font='Arial, 26', bg='blue', fg='chartreuse') # создание надписей на поле приложения
         self.subtitle.place(x=300, y=150, anchor='w')
 
         self.flight_duration = Label(self.master, text="Длительность полета\n (сек)", font='12', bg='blue', fg='white')
         self.flight_duration.place(x=300, y=240, anchor='w')
 
         self.b = DoubleVar()
-        self.duration = Entry(self.master, font='12', textvariable=self.b)
+        self.duration = Entry(self.master, font='12', textvariable=self.b) # создание однострочного текстового поля для ввода и вывода данных
         self.duration.configure(state="disable")
         self.duration.place(x=300, y=300, anchor='w')
 
@@ -124,16 +123,16 @@ class Interface:
 
         self.master.mainloop()
 
-    def openDialog(self):
+    def openDialog(self): # функция вызова дочернего окна с теоретической информацией
         Theory(self.master)
 
-    def url_open(self, url):
+    def url_open(self, url): # функция перехода на веб страницу по ссылке
         webbrowser.open_new(url)
 
-    def openGraphica(self):
+    def openGraphica(self): # функция создания дочернего окна с графикой
         self.create_canv()
 
-    def press(self):
+    def press(self): # функция выбора типа броска (поля ввода неактивны)
         self.subtitle.configure(text="Тип броска: Под углом к горизонту")
         self.duration.configure(state='disable')
         self.rang.configure(state='disable')
@@ -142,7 +141,7 @@ class Interface:
         self.v_val.configure(state='disable')
         self.h_val.configure(state='disable')
 
-    def press_1(self):
+    def press_1(self): # # функция выбора типа броска (поля ввода неактивны)
         self.subtitle.configure(text="Тип броска: Горизонтально")
         self.duration.configure(state='disable')
         self.rang.configure(state='disable')
@@ -151,7 +150,7 @@ class Interface:
         self.v_val.configure(state='disable')
         self.h_val.configure(state='disable')
 
-    def press_2(self):
+    def press_2(self): # функция выбора типа броска (поля ввода неактивны)
         self.subtitle.configure(text="Тип броска: Вертикально вверх")
         self.duration.configure(state='disable')
         self.rang.configure(state='disable')
@@ -160,7 +159,7 @@ class Interface:
         self.v_val.configure(state='disable')
         self.h_val.configure(state='disable')
 
-    def press_input(self):
+    def press_input(self): # функция выбора ввода через клавиатуру (поля ввода становятся активны)
         if self.subtitle.cget('text') == "Тип броска: Под углом к горизонту":
             self.duration.configure(state='normal')
             self.rang.configure(state='normal')
@@ -184,7 +183,7 @@ class Interface:
             self.v_val.configure(state='normal')
             self.altitude.configure(state='normal')
 
-    def calc(self):
+    def calc(self): # функция вычисления параметров
         self.v_n = self.a.get()
         self.t = self.b.get()
         self.h = self.d.get()
@@ -263,11 +262,11 @@ class Interface:
                 self.t = math.sqrt((2 * self.h_n) / self.g)
                 self.b.set(self.t)
 
-            if not self.k.get():
+            if not self.k.get(): # нахождение начальной высоты
                 self.h_n = (self.g * self.t) ** 2 / 2
                 self.k.set(self.h_n)
 
-            if not self.c.get():
+            if not self.c.get(): # нахождение длины полета
                 self.l = self.v_n * math.sqrt((2 * self.h_n) / self.g)
                 self.c.set(self.l)
 
@@ -280,12 +279,12 @@ class Interface:
                 self.t = self.v_n / self.g
                 self.b.set(self.t)
 
-            if not self.d.get():
+            if not self.d.get(): # нахождение высоты
                 self.h = (self.v_n) ** 2 / (2 * self.g)
                 self.d.set(self.h)
         return self.a
 
-    def clear_text(self):
+    def clear_text(self): # функция сброса значений в полях ввода
         self.a.set(0.0)
         self.b.set(0.0)
         self.c.set(0.0)
@@ -293,16 +292,16 @@ class Interface:
         self.j.set(0.0)
         self.k.set(0.0)
 
-    def create_canv(self):
+    def create_canv(self): # функция создания дочернего окна для графического изображения
         self.child_1 = Toplevel()
         self.child_1.title('Graphica')
         self.child_1.geometry('1000x700')
         self.child_1.resizable(False, False)
 
-        self.canv = Canvas(self.child_1)
+        self.canv = Canvas(self.child_1) # создание холста
         self.canv.configure(height=700, width=1000, bg='dodgerBlue')
         self.canv.pack()
-        self.canv.create_line(30, 40, 30, 650, width=4, fill="black")
+        self.canv.create_line(30, 40, 30, 650, width=4, fill="black") # рисование осей координат
         self.canv.create_line(30, 40, 20, 50, width=4, fill="black")
         self.canv.create_line(30, 40, 40, 50, width=4, fill="black")
         self.canv.create_line(30, 650, 800, 650, width=4, fill="black")
@@ -316,11 +315,11 @@ class Interface:
         self.lb_2 = Label(self.canv, text='X', bg='dodgerBlue', fg='navy', font='16')
         self.lb_2.place(x=770, y=670, anchor='w')
 
-        self.start = Button(self.canv, text='СТАРТ', bg='blue', fg='lavender', font='16', command=self.clickStart)
+        self.start = Button(self.canv, text='СТАРТ', bg='blue', fg='lavender', font='16', command=self.clickStart) # создание кнопки для начала анимации траектории полета тела
         self.start.place(x=830, y=650, anchor='w')
 
-    def clickStart(self):
-        self.sc = self.a.get()
+    def clickStart(self): # функция прорисовки (анимации) траектории полета тела
+        self.sc = self.a.get() # считываем данные с полей ввода в переменные
         self.tim = self.b.get()
         self.heig = self.d.get()
         self.h_nach = self.k.get()
@@ -329,7 +328,7 @@ class Interface:
         self.gr = 9.81
 
         if self.subtitle.cget('text') == "Тип броска: Под углом к горизонту":
-            self.scale = 0
+            self.scale = 0 # задаем масштабирование
             if self.sc <= 10:
                 self.scale = 50
             elif 10 < self.sc <= 20:
@@ -340,26 +339,29 @@ class Interface:
                 self.scale = 5
             elif 40 < self.sc < 90:
                 self.scale = 3
-            x = 30
-            y = 650
-            self.point = self.canv.create_oval(x - 7, y - 7, x + 7, y + 7, fill='green')
-            self.i = 0.2
+            x = 30 # нулевая точка на оси Х
+            y = 650 # нулевая точка на оси Y
+            self.point = self.canv.create_oval(x - 7, y - 7, x + 7, y + 7, fill='green') # первая точка в траектории
+            self.i = 0.2 # шаг времени
             self.x = 0
             self.y = 659
-            self.ac = self.sc * math.cos(self.angle1 * math.pi / 180) * self.scale
-            self.bc = self.sc * math.sin(self.angle1 * math.pi / 180)
-            while self.x - 30 <= self.lon * self.scale - 30 or self.y < 630:
+            self.ac = self.sc * math.cos(self.angle1 * math.pi / 180) * self.scale # константа для вычисления
+            self.bc = self.sc * math.sin(self.angle1 * math.pi / 180) # константа для вычисления
+            while self.x - 30 <= self.lon * self.scale - 30 or self.y < 630: # цикл для создания координат точкам и их прорисовка
                 self.x = 30 + self.i * self.ac
                 self.y = 650 - ((self.i * self.bc - self.gr * (self.i * self.i) / 2) * self.scale)
                 self.point = self.canv.create_oval(self.x - 7, self.y - 7, self.x + 7, self.y + 7, fill='green')
                 self.canv.update()
-                time.sleep(0.2)
+                time.sleep(0.2) # создаем задержку при прорисовки следующей точки, что создает эффект анимации
                 self.i += 0.2
-                self.canv.create_text(700, 60, text = "Vo = (t * g) / (2 * cos(a))",  justify = LEFT, font = 'Veranda, 18')
+                self.canv.create_text(700, 60, text="Vo = (t * g) / (2 * cos(a))", justify=LEFT, font='Veranda, 18') # основные формулы расчетов
                 self.canv.create_text(700, 100, text="t = 2 * Vo * cos(a) / g", justify=LEFT, font='Veranda, 18')
-                self.canv.create_text(700, 140, text="n = Vo^2 * (1 - cos(2 * a) / 2) / (2 * g) ", justify=LEFT, font='Veranda, 18')
-                self.canv.create_text(700, 180, text="L = 2 * Vo^2 * sin(a) * cos(a) / g", justify=LEFT, font='Veranda, 18')
-                self.canv.create_text(700, 2200, text="a = acos(t * g / (2 * Vo)) * (180 / pi)", justify=LEFT, font='Veranda, 18')
+                self.canv.create_text(700, 140, text="n = Vo^2 * (1 - cos(2 * a) / 2) / (2 * g) ", justify=LEFT,
+                                      font='Veranda, 18')
+                self.canv.create_text(700, 180, text="L = 2 * Vo^2 * sin(a) * cos(a) / g", justify=LEFT,
+                                      font='Veranda, 18')
+                self.canv.create_text(700, 2200, text="a = acos(t * g / (2 * Vo)) * (180 / pi)", justify=LEFT,
+                                      font='Veranda, 18')
 
         if self.subtitle.cget('text') == "Тип броска: Горизонтально":
             self.scale = 30
@@ -402,11 +404,11 @@ class Interface:
                 self.scale = 15
             elif 20 < self.sc <= 30:
                 self.scale = 10
-            elif 30 < self.sc  <= 40:
+            elif 30 < self.sc <= 40:
                 self.scale = 6
-            elif 40 < self.sc  <= 50:
+            elif 40 < self.sc <= 50:
                 self.scale = 3
-            elif self.sc  > 50:
+            elif self.sc > 50:
                 self.scale = 1
 
             x = 35
@@ -431,12 +433,12 @@ class Interface:
         self.child_1.focus_set()
         self.child_1.wait_window()
 
-    def file_save(self):
-        file_name = fd.asksaveasfilename(
+    def file_save(self): # функция сохранения результатов вычисления в файл
+        file_name = fd.asksaveasfilename(  # выбор файла или создание нового
             filetypes=(("TXT files", "*.txt"),
                        ("HTML files", "*.html;*.htm"),
                        ("All files", "*.*")))
-        if self.subtitle.cget('text') == "Тип броска: Под углом к горизонту":
+        if self.subtitle.cget('text') == "Тип броска: Под углом к горизонту":  # подготовка строк
             s0 = ''
             s = "Длительность полета, (сек) - "
             s1 = self.duration.get()
@@ -471,52 +473,52 @@ class Interface:
             s10 = "Начальная высота, (м)"
             s11 = self.h_val.get()
             lines = [s, s1, s0, s2, s3, s0, s8, s9, s0, s10, s11]
-        with open(file_name, "w") as f:
-            f.writelines("%s\n" % line for line in lines)
+        with open(file_name, "w") as f: # открытие файла
+            f.writelines("%s\n" % line for line in lines) # запись в файл
 
-    def read_text(self):
-        self.press_input()
-        file_name = fd.askopenfilename()
+    def read_text(self): # функция считывания входных данных из файла
+        self.press_input() # вызов функции для того, чтобы поля ввода стали активными
+        file_name = fd.askopenfilename() # выбор файла
         s1 = 'Длительность полета, (сек) -'
-        s2= 'Дальность полета, (м) -'
-        s3= 'Высота полета, (м) -'
-        s4= 'Угол под которым было брошено тело, (°) -'
-        s5= 'Начальная скорость, (м/с) -'
-        s6= 'Начальная высота, (м)'
-        f = open(file_name, "r", encoding='utf-8')
-        s = list(map(str.strip,f.readlines() ))
-        for i in range(len(s)):
+        s2 = 'Дальность полета, (м) -'
+        s3 = 'Высота полета, (м) -'
+        s4 = 'Угол под которым было брошено тело, (°) -'
+        s5 = 'Начальная скорость, (м/с) -'
+        s6 = 'Начальная высота, (м)'
+        f = open(file_name, "r", encoding='utf-8') # открытие файла
+        s = list(map(str.strip, f.readlines())) # считывание всего файла в лист
+        for i in range(len(s)): # выбор нужных значений и запись их в поля ввода данных
             a = s[i]
             if a == s1:
                 self.duration.delete(0, 'end')
-                self.duration.insert(INSERT, s[i+1])
+                self.duration.insert(INSERT, s[i + 1])
             if a == s2:
                 self.rang.delete(0, 'end')
-                self.rang.insert(INSERT, s[i+1])
+                self.rang.insert(INSERT, s[i + 1])
             if a == s3:
                 self.altitude.delete(0, 'end')
-                self.altitude.insert(INSERT, s[i+1])
-            if  a == s4:
+                self.altitude.insert(INSERT, s[i + 1])
+            if a == s4:
                 self.angle_val.delete(0, 'end')
-                self.angle_val.insert(INSERT, s[i+1])
+                self.angle_val.insert(INSERT, s[i + 1])
             if a == s5:
                 self.v_val.delete(0, 'end')
-                self.v_val.insert(INSERT, s[i+1])
+                self.v_val.insert(INSERT, s[i + 1])
             if a == s6:
                 self.h_val.delete(0, 'end')
-                self.h_val.insert(INSERT, s[i+1])
+                self.h_val.insert(INSERT, s[i + 1])
         f.close()
 
 
-class Theory:
+class Theory: # класс для ознакомления с теорий
     def __init__(self, master):
         self.child = Toplevel(master)
         self.child.title('Theory')
         self.child.geometry('1000x700')
         self.child.resizable(False, False)
 
-        self.txt = ScrolledText(self.child, width=900, height=700, font='14', wrap=WORD, bg='plum')
-        self.txt.insert(INSERT, self.insert_text(self.txt))
+        self.txt = ScrolledText(self.child, width=900, height=700, font='14', wrap=WORD, bg='plum') # создание текстового поля со скроллом
+        self.txt.insert(INSERT, self.insert_text(self.txt)) # считывание с файла и запись в текстовое поле теоретического материала
         self.txt.configure(state='disabled')
         self.txt.pack()
 
@@ -524,7 +526,7 @@ class Theory:
         self.child.focus_set()
         self.child.wait_window()
 
-    def insert_text(self, txt):
+    def insert_text(self, txt): # функция считывания текста из файла и запись его в текстовое поле
         f = open('txt.txt', 'r', encoding='utf-8')
         s = f.readlines()
         for line in s:
