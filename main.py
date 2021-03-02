@@ -197,57 +197,40 @@ class Interface:
                 if not self.b.get():
                     self.v_n = math.sqrt(self.l * self.g) / (
                             2 * math.sin(math.radians(self.angle)) * math.cos(math.radians(self.angle)))
-                    self.a.set(self.v_n)
                 else:
                     self.v_n = (self.t * self.g) / (2 * math.cos(math.radians(self.angle)))
-                    self.a.set(self.v_n)
-
+                self.a.set(self.v_n)
             if not self.b.get():  # нахождение времени
                 if not self.a.get():
                     self.v_n = math.sqrt(self.l * self.g) / (2 * math.sin(math.radians(self.angle)) \
                                                              * math.cos(math.radians(self.angle)))
-                    self.t = 2 * self.v_n * (math.cos(math.radians(self.angle))) / self.g
-                    self.b.set(self.t)
-                else:
-                    self.t = 2 * self.v_n * (math.cos(math.radians(self.angle))) / self.g
-                    self.b.set(self.t)
-
+                self.t = 2 * self.v_n * (math.cos(math.radians(self.angle))) / self.g
+                self.b.set(self.t)
             if not self.d.get():  # нахождение высоты
                 if not self.a.get() and not self.b.get():
                     self.v_n = math.sqrt(self.l * self.g) / (2 * math.sin(math.radians(self.angle)) \
                                                              * math.cos(math.radians(self.angle)))
                     self.t = 2 * self.v_n * (math.cos(math.radians(self.angle))) / self.g
-                    self.h = ((self.v_n) * (self.v_n) * ((1 - math.cos(math.radians(2 * self.angle))) / 2)) / (
-                            2 * self.g)
-                    self.d.set(self.h)
                 elif not self.j.get():
                     cn = (self.t * self.g) / (2 * self.v_n)
                     self.angle = math.acos(cn) * (180 / math.pi)
-                    self.h = ((self.v_n) * (self.v_n) * ((1 - math.cos(math.radians(2 * self.angle))) / 2)) / (
-                            2 * self.g)
-                    self.d.set(self.h)
-                else:
-                    self.h = ((self.v_n) * (self.v_n) * ((1 - math.cos(math.radians(2 * self.angle))) / 2)) / (
-                            2 * self.g)
-                    self.d.set(self.h)
-
+                self.h = ((self.v_n) * (self.v_n) * ((1 - math.cos(math.radians(2 * self.angle))) / 2)) / (
+                        2 * self.g)
+                self.d.set(self.h)
             if not self.c.get():  # нахождение длины полета
                 if not self.a.get() and self.j.get():
                     self.v_n = (self.t * self.g) / (2 * math.cos(math.radians(self.angle)))
                     self.l = ((self.v_n) ** 2) * (2 * math.sin(math.radians(self.angle)) \
                                                   * math.cos(math.radians(self.angle))) / self.g
-                    self.c.set(self.l)
                 elif not self.j.get() and self.a.get():
                     cn = (self.t * self.g) / (2 * self.v_n)
                     self.angle1 = math.acos(cn) * (180 / math.pi)
                     self.l = ((self.v_n) ** 2) * (2 * math.sin(math.radians(self.angle1)) \
                                                   * math.cos(math.radians(self.angle1))) / self.g
-                    self.c.set(self.l)
                 else:
                     self.l = ((self.v_n) ** 2) * (2 * math.sin(math.radians(self.angle)) \
                                                   * math.cos(math.radians(self.angle))) / self.g
-                    self.c.set(self.l)
-
+                self.c.set(self.l)
             if not self.j.get():  # нахождение угла
                 cn = (self.t * self.g) / (2 * self.v_n)
                 self.angle = math.acos(cn) * (180 / math.pi)
@@ -532,7 +515,6 @@ class Theory: # класс для ознакомления с теорий
         for line in s:
             self.txt.insert(INSERT, line)
         return self.txt
-        f.close()
 
 
 win = Tk()
